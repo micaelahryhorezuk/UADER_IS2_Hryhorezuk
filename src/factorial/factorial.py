@@ -27,11 +27,33 @@ def factorial(num):
 
 #CODIGO MODIFICADO PARA PERMITIR INGRESO POR TECLADO SI NO SE PASA ARGUMENTO POR CONSOLA
 # Si se pasa argumento por consola
-if len(sys.argv) > 1:
-    num = int(sys.argv[1])
-else:
+#if len(sys.argv) > 1:
+    #num = int(sys.argv[1])
+#else:
     # Si no se pasa argumento, se solicita por teclado
-    num = int(input("Ingrese un número: "))
+    #num = int(input("Ingrese un número: "))
 
-print("Factorial ",num,"! es ", factorial(num)) 
+#print("Factorial ",num,"! es ", factorial(num)) 
 
+# CÓDIGO MODIFICADO PARA ACEPTAR NUMEROS EN EL RANGO DESDE-HASTA
+
+# Obtener entrada (puede ser número o rango)
+if len(sys.argv) > 1:
+    entrada = sys.argv[1]
+else:
+    entrada = input("Ingrese un número o rango (ej: 4-8): ")
+
+    # Verificar si es un rango
+if "-" in entrada:
+    partes = entrada.split("-")
+    desde = int(partes[0])
+    hasta = int(partes[1])
+
+    # Calcular factoriales en el rango
+    for i in range(desde, hasta + 1):
+        print(f"{i}! = {factorial(i)}")
+
+else:
+    # Caso número único
+    num = int(entrada)
+    print(f"{num}! = {factorial(num)}")
