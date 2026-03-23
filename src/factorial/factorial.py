@@ -38,22 +38,58 @@ def factorial(num):
 # CÓDIGO MODIFICADO PARA ACEPTAR NUMEROS EN EL RANGO DESDE-HASTA
 
 # Obtener entrada (puede ser número o rango)
+#if len(sys.argv) > 1:
+    #entrada = sys.argv[1]
+#else:
+    #entrada = input("Ingrese un número o rango (ej: 4-8): ")
+
+    # Verificar si es un rango
+#if "-" in entrada:
+    #partes = entrada.split("-")
+    #desde = int(partes[0])
+    #hasta = int(partes[1])
+
+    # Calcular factoriales en el rango
+    #for i in range(desde, hasta + 1):
+     #   print(f"{i}! = {factorial(i)}")
+
+#else:
+    # Caso número único
+ #   num = int(entrada)
+  #  print(f"{num}! = {factorial(num)}"
+
+# CÓDIGO MODIFICADO PARA ACEPTAR RANGO DESDE-HASTA, -HASTA Y DESDE- (HASTA 60)
+
+# Obtener entrada
 if len(sys.argv) > 1:
     entrada = sys.argv[1]
 else:
-    entrada = input("Ingrese un número o rango (ej: 4-8): ")
+    entrada = input("Ingrese número o rango (ej: 4-8, -10, 5-): ")
 
-    # Verificar si es un rango
+# Procesar entrada
 if "-" in entrada:
     partes = entrada.split("-")
-    desde = int(partes[0])
-    hasta = int(partes[1])
 
-    # Calcular factoriales en el rango
+    # Caso: -hasta  (ej: -10)
+    if partes[0] == "":
+        desde = 1
+        hasta = int(partes[1])
+
+    # Caso: desde-  (ej: 5-)
+    elif partes[1] == "":
+        desde = int(partes[0])
+        hasta = 60
+
+    # Caso: desde-hasta (ej: 4-8)
+    else:
+        desde = int(partes[0])
+        hasta = int(partes[1])
+
+    # Calcular factoriales
     for i in range(desde, hasta + 1):
         print(f"{i}! = {factorial(i)}")
 
 else:
-    # Caso número único
+    # Número único
     num = int(entrada)
     print(f"{num}! = {factorial(num)}")
