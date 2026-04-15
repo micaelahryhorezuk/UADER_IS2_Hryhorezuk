@@ -6,7 +6,7 @@ Cobertura objetivo: >= 90%
 import math
 import unittest
 
-from rnp import RPNError, evaluate
+from rpn import RPNError, evaluate
 
 
 class TestBasicOperations(unittest.TestCase):

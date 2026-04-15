@@ -2,7 +2,7 @@
 rpn.py - Calculadora RPN (Reverse Polish Notation)
 Soporta operaciones básicas, funciones matemáticas, trigonometría,
 comandos de pila, constantes, memorias y manejo de errores.
-"""
+nano rpn.py"""
 
 import math
 import sys
@@ -123,7 +123,8 @@ def _apply_yx(stack: list) -> None:
 
 def _apply_stack_cmd(stack: list, cmd: str) -> None:
     """Ejecuta comandos de manipulación de pila: dup, swap, drop, clear."""
-    # dup: duplica el tope; swap: intercambia los dos topes; drop: descarta; clear: vacía
+   # dup: duplica el tope; swap: intercambia los dos topes
+    # drop: descarta el tope; clear: vacía la pila
     if cmd == "dup":
         _require(stack, 1)
         stack.append(stack[-1])
@@ -260,3 +261,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+
