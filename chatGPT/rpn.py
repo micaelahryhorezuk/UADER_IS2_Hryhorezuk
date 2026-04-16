@@ -239,24 +239,30 @@ def evaluate(expression: str) -> float:
 
 
 def main() -> None:
-    """Punto de entrada: acepta expresión por argumento de línea o stdin."""
+    """Punto de entrada: acepta expresión por argumento o modo interactivo."""
     if len(sys.argv) > 1:
-        # Expresión pasada como argumentos en línea de comandos
+        # Modo argumento: expresión pasada directamente
         expression = " ".join(sys.argv[1:])
+        try:
+            result = evaluate(expression)
+            print(int(result) if result == int(result) else result)
+        except RPNError as err:
+            print(f"Error: {err}", file=sys.stderr)
+            sys.exit(1)
     else:
-        # Leer desde stdin (interactivo o pipe)
-        expression = input("RPN> ")
-
-    try:
-        result = evaluate(expression)
-        # Mostrar entero si no tiene parte decimal
-        if result == int(result):
-            print(int(result))
-        else:
-            print(result)
-    except RPNError as err:
-        print(f"Error: {err}", file=sys.stderr)
-        sys.exit(1)
+        # Modo interactivo: loop hasta que el usuario escriba exit o quit
+        print("Calculadora RPN — escribí 'exit' para salir")
+        while True:
+            try:
+                expression = input("RPN> ").strip()
+                if expression.lower() in ("exit", "quit"):
+                    break
+                if not expression:
+                    continue
+                result = evaluate(expression)
+                print(int(result) if result == int(result) else result)
+            except RPNError as err:
+                print(f"Error: {err}", file=sys.stderr)
 
 
 if __name__ == "__main__":
