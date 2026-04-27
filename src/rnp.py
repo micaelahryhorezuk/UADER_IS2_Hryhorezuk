@@ -2,7 +2,7 @@
 rpn.py - Calculadora RPN (Reverse Polish Notation)
 Soporta operaciones básicas, funciones matemáticas, trigonometría,
 comandos de pila, constantes, memorias y manejo de errores.
-nano rpn.py"""
+"""
 
 import math
 import sys
@@ -123,8 +123,7 @@ def _apply_yx(stack: list) -> None:
 
 def _apply_stack_cmd(stack: list, cmd: str) -> None:
     """Ejecuta comandos de manipulación de pila: dup, swap, drop, clear."""
-   # dup: duplica el tope; swap: intercambia los dos topes
-    # drop: descarta el tope; clear: vacía la pila
+    # dup: duplica el tope; swap: intercambia los dos topes; drop: descarta; clear: vacía
     if cmd == "dup":
         _require(stack, 1)
         stack.append(stack[-1])
@@ -239,28 +238,25 @@ def evaluate(expression: str) -> float:
 
 
 def main() -> None:
-    """Punto de entrada: acepta expresión por argumento o modo interactivo."""
+    """Punto de entrada: acepta expresión por argumento de línea o stdin."""
     if len(sys.argv) > 1:
-        # Modo argumento: expresión pasada directamente
+        # Expresión pasada como argumentos en línea de comandos
         expression = " ".join(sys.argv[1:])
-        try:
-            result = evaluate(expression)
-            print(int(result) if result == int(result) else result)
-        except RPNError as err:
-            print(f"Error: {err}", file=sys.stderr)
-            sys.exit(1)
     else:
-        # Modo interactivo: loop hasta que el usuario escriba exit o quit
-        print("Calculadora RPN — escribí 'exit' para salir")
-        while True:
-            try:
-                expression = input("RPN> ").strip()
-                if expression.lower() in ("exit", "quit"):
-                    break
-                if not expression:
-                    continue
-                result = evaluate(expression)
-                print(int(result) if result == int(result) else result)
-            except RPNError as err:
-                print(f"Error: {err}", file=sys.stderr)
+        # Leer desde stdin (interactivo o pipe)
+        expression = input("RPN> ")
 
+    try:
+        result = evaluate(expression)
+        # Mostrar entero si no tiene parte decimal
+        if result == int(result):
+            print(int(result))
+        else:
+            print(result)
+    except RPNError as err:
+        print(f"Error: {err}", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
