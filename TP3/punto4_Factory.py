@@ -4,25 +4,25 @@
 #condición
 
 from abc import ABC, abstractmethod
-class Factura(ABC):
+class Factura(ABC): # clase abstracta para representar una factura con un método de generación
     def __init__(self, importe):
         self.importe = importe
 
     @abstractmethod
     def generar_factura(self):
         pass                            
-class FacturaIVAResponsable(Factura):
+class FacturaIVAResponsable(Factura): # clase concreta que representa una factura para un cliente IVA Responsable
     def generar_factura(self):
         iva = self.importe * 0.21
         total = self.importe + iva
         print(f"Factura IVA Responsable: Importe: {self.importe}, IVA: {iva}, Total: {total}")
-class FacturaIVANoInscripto(Factura):
+class FacturaIVANoInscripto(Factura): # clase concreta que representa una factura para un cliente IVA No Inscripto
     def generar_factura(self):
         print(f"Factura IVA No Inscripto: Importe: {self.importe}, Total: {self.importe}")
-class FacturaIVAExento(Factura):
+class FacturaIVAExento(Factura): # clase concreta que representa una factura para un cliente IVA Exento
     def generar_factura(self):
         print(f"Factura IVA Exento: Importe: {self.importe}, Total: {self.importe}")
-class FacturaFactory:
+class FacturaFactory:   # clase factory para crear instancias de facturas según la condición impositiva del cliente
     @staticmethod
     def crear_factura(importe, condicion_impositiva):
         if condicion_impositiva == "IVA Responsable":

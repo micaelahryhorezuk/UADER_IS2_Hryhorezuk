@@ -6,7 +6,7 @@ class Prototipo(ABC):
     @abstractmethod
     def clonar(self):
         pass
-class PrototipoConcreto(Prototipo):
+class PrototipoConcreto(Prototipo): # clase concreta que implementa el prototipo, con un atributo 'valor' y un método 'clonar' que devuelve una copia profunda de sí misma
     def __init__(self, valor):
         self.valor = valor
 
