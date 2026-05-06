@@ -264,9 +264,3 @@ def main() -> None:
             except RPNError as err:
                 print(f"Error: {err}", file=sys.stderr)
 
-
-if __name__ == "__main__":
-    main()
-
-
-
